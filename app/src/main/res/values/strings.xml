@@ -7,4 +7,6 @@
     <string name="kufre_udoh">Kufre Udoh</string>
     <string name="aa">AA</string>
     <string name="_07067991832">07067991832</string>
+    <string name="make_request_to_read_contacts">MAKE REQUEST AGAIN</string>
+    <string name="make_request">MyContact app needs access to read your phone\'s contact. Kindly click the button below to make request again</string>
 </resources>
