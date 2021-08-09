@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "775171076153",
+    "firebase_url": "https://contactsapplication-92564-default-rtdb.firebaseio.com",
+    "project_id": "contactsapplication-92564",
+    "storage_bucket": "contactsapplication-92564.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:775171076153:android:6ce793a90c75d01fd6dde8",
+        "android_client_info": {
+          "package_name": "com.gentlekboy.mycontactapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "775171076153-9966285lhd32geec044sda1a460aaiqp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgf149ucNJTlFmcIuhzRPxHajuBn_2_nY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "775171076153-9966285lhd32geec044sda1a460aaiqp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:775171076153:android:a80411ba0aa45c23d6dde8",
+        "android_client_info": {
+          "package_name": "com.raywenderlich.timefighter.contactsapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "775171076153-9966285lhd32geec044sda1a460aaiqp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgf149ucNJTlFmcIuhzRPxHajuBn_2_nY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "775171076153-9966285lhd32geec044sda1a460aaiqp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
