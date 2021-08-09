@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">MyContact App</string>
+    <string name="second_implementation">SECOND IMPLEMENTATION</string>
+    <string name="first_implementation">FIRST IMPLEMENTATION</string>
+    <string name="welcome_to_mycontact_app">WELCOME TO MYCONTACT APP</string>
+    <string name="background_image_for_welcome_page">Background image for welcome page</string>
 </resources>
