@@ -27,6 +27,9 @@ class ContactAdapter: RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
     fun addContacts(contactsData: ContactsData){
         if (!listOfContactsToBeShown.contains(contactsData)){
             listOfContactsToBeShown.add(contactsData)
+        }else{
+            val index = listOfContactsToBeShown.indexOf(contactsData)
+            listOfContactsToBeShown[index] = contactsData
         }
         notifyDataSetChanged()
     }
