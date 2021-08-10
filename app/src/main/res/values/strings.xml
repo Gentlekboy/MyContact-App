@@ -9,4 +9,20 @@
     <string name="_07067991832">07067991832</string>
     <string name="make_request_to_read_contacts">MAKE REQUEST AGAIN</string>
     <string name="make_request">MyContact app needs access to read your phone\'s contact. Kindly click the button below to make request again</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_a_new_contact_button">Add a new contact button</string>
+    <string name="kufre">Kufre</string>
+    <string name="udoh">Udoh</string>
+    <string name="create_a_new_contact">Create a new contact</string>
+    <string name="save">SAVE</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="phone_number">Phone number</string>
+    <string name="email_address">Email address</string>
+    <string name="added_contact">Contact has been added</string>
+    <string name="error">%1$s</string>
+    <string name="first_name_required">First name is required</string>
+    <string name="last_name_required">Last name is required</string>
+    <string name="phone_number_name_required">Phone number is required</string>
 </resources>

@@ -21,7 +21,6 @@
             android:layout_height="match_parent"
             android:paddingVertical="4dp">
 
-
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView3"
                 android:layout_width="45dp"
@@ -39,7 +38,7 @@
                     android:padding="5dp">
 
                     <TextView
-                        android:id="@+id/name_abbreviation_field"
+                        android:id="@+id/name_abbreviation"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/aa"
@@ -59,16 +58,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:text="@string/kufre_udoh"
+                android:text="@string/kufre"
                 android:textSize="22sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/cardView3"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/phone_number_field"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/udoh"
+                android:textSize="22sp"
+                app:layout_constraintBottom_toBottomOf="@+id/first_name"
+                app:layout_constraintStart_toEndOf="@+id/first_name"
+                app:layout_constraintTop_toTopOf="@+id/first_name" />
+
+            <TextView
+                android:id="@+id/phone_number"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/_07067991832"
                 android:textSize="18sp"
