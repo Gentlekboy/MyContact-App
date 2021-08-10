@@ -1,4 +1,4 @@
-package com.gentlekboy.mycontactapp.secondImplementation
+package com.gentlekboy.mycontactapp.secondImplementation.recyclerviewsetup
 
 data class ContactReaderData (
     val fullName: String,

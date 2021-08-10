@@ -1,4 +1,4 @@
-package com.gentlekboy.mycontactapp.firstImplementation
+package com.gentlekboy.mycontactapp.firstImplementation.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
