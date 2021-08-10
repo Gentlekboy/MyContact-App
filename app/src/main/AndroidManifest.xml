@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyContactApp">
         <activity
-            android:name=".firstImplementation.ContactList"
+            android:name=".firstImplementation.ui.ContactList"
             android:exported="true" />
         <activity
             android:name=".secondImplementation.ContactReader"
