@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.gentlekboy.mycontactapp.R
 import com.gentlekboy.mycontactapp.databinding.FragmentContactsBinding
 
@@ -46,6 +48,34 @@ class ContactsFragment : Fragment() {
         })
 
         viewModel.getRealTimeUpdate()
+
+        //Update recyclerview when an update is made
+        val itemTouchHelper = ItemTouchHelper(simpleCallBack)
+        itemTouchHelper.attachToRecyclerView(binding.recyclerview)
+    }
+
+    private var simpleCallBack = object: ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT.or(ItemTouchHelper.RIGHT)){
+        override fun onMove(
+            recyclerView: RecyclerView,
+            viewHolder: RecyclerView.ViewHolder,
+            target: RecyclerView.ViewHolder
+        ): Boolean {
+            return true
+        }
+
+        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+            val position = viewHolder.absoluteAdapterPosition
+            val currentContact = adapter.listOfContactsToBeShown[position]
+
+            when(direction){
+                ItemTouchHelper.RIGHT -> {
+                    UpdateContactFragment(currentContact).show(childFragmentManager, "")
+                }
+            }
+
+            binding.recyclerview.adapter?.notifyDataSetChanged()
+        }
+
     }
 
     override fun onDestroy() {
