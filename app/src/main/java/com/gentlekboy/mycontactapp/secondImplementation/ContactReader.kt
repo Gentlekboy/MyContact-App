@@ -12,6 +12,8 @@ import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.gentlekboy.mycontactapp.R
+import com.gentlekboy.mycontactapp.secondImplementation.recyclerviewsetup.ContactReaderAdapter
+import com.gentlekboy.mycontactapp.secondImplementation.recyclerviewsetup.ContactReaderData
 
 class ContactReader : AppCompatActivity() {
     //Initialized required variables
