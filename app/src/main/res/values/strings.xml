@@ -25,4 +25,6 @@
     <string name="first_name_required">First name is required</string>
     <string name="last_name_required">Last name is required</string>
     <string name="phone_number_name_required">Phone number is required</string>
+    <string name="edit_contact">Edit contact</string>
+    <string name="update">UPDATE</string>
 </resources>
