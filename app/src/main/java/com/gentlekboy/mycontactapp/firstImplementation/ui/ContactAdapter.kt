@@ -14,11 +14,21 @@ class ContactAdapter: RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        holder.binding.nameAbbreviation.text = listOfContactsToBeShown[position].abbreviation
+        holder.binding.firstName.text = listOfContactsToBeShown[position].firstName
+        holder.binding.lastName.text = listOfContactsToBeShown[position].lastName
+        holder.binding.phoneNumber.text = listOfContactsToBeShown[position].phoneNumber
     }
 
     override fun getItemCount(): Int {
         return listOfContactsToBeShown.size
+    }
+
+    fun addContacts(contactsData: ContactsData){
+        if (!listOfContactsToBeShown.contains(contactsData)){
+            listOfContactsToBeShown.add(contactsData)
+        }
+        notifyDataSetChanged()
     }
 
     inner class ViewHolder(val binding: RecyclerviewContactsBinding): RecyclerView.ViewHolder(binding.root)
