@@ -4,7 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import com.gentlekboy.mycontactapp.firstImplementation.ContactList
+import com.gentlekboy.mycontactapp.firstImplementation.ui.ContactList
 import com.gentlekboy.mycontactapp.secondImplementation.ContactReader
 
 class MainActivity : AppCompatActivity() {
