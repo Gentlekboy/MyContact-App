@@ -9,5 +9,33 @@
         android:id="@+id/contactsFragment"
         android:name="com.gentlekboy.mycontactapp.firstImplementation.ui.ContactsFragment"
         android:label="fragment_contacts"
-        tools:layout="@layout/fragment_contacts" />
+        tools:layout="@layout/fragment_contacts" >
+        <action
+            android:id="@+id/action_contactsFragment_to_addFragment"
+            app:destination="@id/addFragment" />
+        <action
+            android:id="@+id/action_contactsFragment_to_contactDetailFragment"
+            app:destination="@id/contactDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addFragment"
+        android:name="com.gentlekboy.mycontactapp.firstImplementation.ui.AddFragment"
+        android:label="AddFragment"
+        tools:layout="@layout/fragment_add">
+        <action
+            android:id="@+id/action_addFragment_to_contactsFragment"
+            app:destination="@id/contactsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/contactDetailFragment"
+        android:name="com.gentlekboy.mycontactapp.firstImplementation.ui.ContactDetailFragment"
+        android:label="fragment_contact_detail"
+        tools:layout="@layout/fragment_contact_detail" >
+        <argument
+            android:name="contactData"
+            app:argType="com.gentlekboy.mycontactapp.firstImplementation.data.ContactsData" />
+        <action
+            android:id="@+id/action_contactDetailFragment_to_contactsFragment"
+            app:destination="@id/contactsFragment" />
+    </fragment>
 </navigation>
