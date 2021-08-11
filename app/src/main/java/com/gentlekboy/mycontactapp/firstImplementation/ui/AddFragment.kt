@@ -1,32 +1,31 @@
 package com.gentlekboy.mycontactapp.firstImplementation.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.gentlekboy.mycontactapp.R
-import com.gentlekboy.mycontactapp.databinding.FragmentAddContactBinding
+import com.gentlekboy.mycontactapp.databinding.FragmentAddBinding
 import com.gentlekboy.mycontactapp.firstImplementation.data.ContactsData
 
-class AddContactFragment : DialogFragment() {
-    private var _binding: FragmentAddContactBinding? = null
+class AddFragment : Fragment() {
+    private var _binding: FragmentAddBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: ContactsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(STYLE_NO_TITLE, android.R.style.Theme_DeviceDefault_Light_Dialog_MinWidth)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentAddContactBinding.inflate(inflater, container, false)
+        _binding = FragmentAddBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this).get(ContactsViewModel::class.java)
 
         return binding.root
@@ -44,9 +43,9 @@ class AddContactFragment : DialogFragment() {
             }
 
             Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-            dismiss()
         })
 
+        //Save contact on click of the save button
         binding.saveContactButton.setOnClickListener {
             val contactFirstName = binding.firstName.text.toString().trim()
             val contactLastName = binding.lastName.text.toString().trim()
@@ -68,6 +67,7 @@ class AddContactFragment : DialogFragment() {
                 return@setOnClickListener
             }
 
+            //Save added contact to the contact data object
             val contactsData = ContactsData()
             contactsData.firstName = contactFirstName
             contactsData.lastName = contactLastName
@@ -75,6 +75,10 @@ class AddContactFragment : DialogFragment() {
             contactsData.email = contactEmail
 
             viewModel.addContact(contactsData)
+
+            //Navigate to Contact fragment to view added contact
+            val action = AddFragmentDirections.actionAddFragmentToContactsFragment()
+            findNavController().navigate(action)
         }
     }
 }
