@@ -26,10 +26,20 @@ class ContactAdapter: RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
 
     fun addContacts(contactsData: ContactsData){
         if (!listOfContactsToBeShown.contains(contactsData)){
+            //Add contact to array list
             listOfContactsToBeShown.add(contactsData)
+
         }else{
             val index = listOfContactsToBeShown.indexOf(contactsData)
-            listOfContactsToBeShown[index] = contactsData
+
+            if (contactsData.isDeleted){
+                //Remove contact from array list
+                listOfContactsToBeShown.removeAt(index)
+
+            }else{
+                //Update contact in the array list
+                listOfContactsToBeShown[index] = contactsData
+            }
         }
         notifyDataSetChanged()
     }
