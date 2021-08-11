@@ -49,6 +49,16 @@ class ContactsViewModel: ViewModel() {
         }
     }
 
+    fun deleteContact(contactsData: ContactsData){
+        dbcontacts.child(contactsData.id!!).setValue(null).addOnCompleteListener {
+            if (it.isSuccessful){
+                _result.value = null
+            }else{
+                _result.value = it.exception
+            }
+        }
+    }
+
     private val childEventListener = object: ChildEventListener{
         //When a new contact has been added
         override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
@@ -63,7 +73,12 @@ class ContactsViewModel: ViewModel() {
             _contacts.value = contact
         }
 
-        override fun onChildRemoved(snapshot: DataSnapshot) {}
+        override fun onChildRemoved(snapshot: DataSnapshot) {
+            val contact = snapshot.getValue(ContactsData::class.java)
+            contact?.id = snapshot.key
+            contact?.isDeleted = true
+            _contacts.value = contact
+        }
 
         override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {}
 
