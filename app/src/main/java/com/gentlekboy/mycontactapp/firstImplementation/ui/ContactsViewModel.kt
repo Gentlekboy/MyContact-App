@@ -21,9 +21,11 @@ class ContactsViewModel: ViewModel() {
     private val _result = MutableLiveData<Exception?>()
     val result: LiveData<Exception?> get() = _result
 
+    //Observe if data has been successfully added to contacts data
     private val _contacts = MutableLiveData<ContactsData?>()
     val contacts: LiveData<ContactsData?> get() = _contacts
 
+    //This function adds contacts to database
     fun addContact(contactsData: ContactsData){
         contactsData.id = dbcontacts.push().key.toString()
         contactsData.abbreviation = contactsData.firstName?.get(0)?.uppercaseChar().toString() +
@@ -39,6 +41,7 @@ class ContactsViewModel: ViewModel() {
         }
     }
 
+    //This function updates the database
     fun updateContact(contactsData: ContactsData){
         dbcontacts.child(contactsData.id!!).setValue(contactsData).addOnCompleteListener {
             if (it.isSuccessful){
@@ -49,6 +52,7 @@ class ContactsViewModel: ViewModel() {
         }
     }
 
+    //This contact deletes contact from database
     fun deleteContact(contactsData: ContactsData){
         dbcontacts.child(contactsData.id!!).setValue(null).addOnCompleteListener {
             if (it.isSuccessful){

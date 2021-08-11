@@ -1,15 +1,14 @@
 package com.gentlekboy.mycontactapp.firstImplementation.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.gentlekboy.mycontactapp.R
-import com.gentlekboy.mycontactapp.databinding.FragmentAddContactBinding
 import com.gentlekboy.mycontactapp.databinding.FragmentUpdateContactBinding
 import com.gentlekboy.mycontactapp.firstImplementation.data.ContactsData
 
@@ -20,7 +19,9 @@ class UpdateContactFragment(private val contactsData: ContactsData) : DialogFrag
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(STYLE_NO_TITLE, android.R.style.Theme_DeviceDefault_Light_Dialog_MinWidth)
+
+        //Set style for dialogue fragment
+        setStyle(STYLE_NO_TITLE, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen)
     }
 
     override fun onCreateView(
@@ -33,7 +34,6 @@ class UpdateContactFragment(private val contactsData: ContactsData) : DialogFrag
         return binding.root
     }
 
-    //Observe live data
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
@@ -42,6 +42,7 @@ class UpdateContactFragment(private val contactsData: ContactsData) : DialogFrag
         binding.phoneNumber.setText(contactsData.phoneNumber)
         binding.emailAddress.setText(contactsData.email)
 
+        //Update contact detail on click of the update button
         binding.updateButton.setOnClickListener {
             val contactFirstName = binding.firstName.text.toString().trim()
             val contactLastName = binding.lastName.text.toString().trim()
@@ -71,7 +72,7 @@ class UpdateContactFragment(private val contactsData: ContactsData) : DialogFrag
             viewModel.updateContact(contactsData)
             dismiss()
 
-            Toast.makeText(context, "Contact has been update", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Contact updated successfully", Toast.LENGTH_SHORT).show()
         }
     }
 }
