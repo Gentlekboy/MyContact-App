@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.28177083333333336" />
         <entry key="app/src/main/res/drawable-v24/ic_baseline_arrow_back_ios_24.xml" value="0.2828125" />
         <entry key="app/src/main/res/drawable-v24/ic_baseline_person_24.xml" value="0.2828125" />
         <entry key="app/src/main/res/drawable/searchview_background.xml" value="0.2828125" />
@@ -12,7 +13,9 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.27708333333333335" />
         <entry key="app/src/main/res/layout/contact_reader_adapter.xml" value="0.2625" />
         <entry key="app/src/main/res/layout/contact_reader_view_holder.xml" value="0.254981884057971" />
+        <entry key="app/src/main/res/layout/fragment_add.xml" value="0.254981884057971" />
         <entry key="app/src/main/res/layout/fragment_add_contact.xml" value="0.2625" />
+        <entry key="app/src/main/res/layout/fragment_contact_detail.xml" value="0.2625" />
         <entry key="app/src/main/res/layout/fragment_contacts.xml" value="0.2625" />
         <entry key="app/src/main/res/layout/fragment_update_contact.xml" value="0.254981884057971" />
         <entry key="app/src/main/res/layout/recyclerview_contacts.xml" value="0.2625" />
