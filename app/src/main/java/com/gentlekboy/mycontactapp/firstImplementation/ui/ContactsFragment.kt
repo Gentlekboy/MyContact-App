@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -70,6 +72,16 @@ class ContactsFragment : Fragment() {
             when(direction){
                 ItemTouchHelper.RIGHT -> {
                     UpdateContactFragment(currentContact).show(childFragmentManager, "")
+                }
+                ItemTouchHelper.LEFT -> {
+                    AlertDialog.Builder(requireContext()).also {
+                        it.setTitle("Are you sure you want to delete this contact?")
+                        it.setPositiveButton("Yes"){dialogue, which ->
+                            viewModel.deleteContact(currentContact)
+                            binding.recyclerview.adapter?.notifyItemRemoved(position)
+                            Toast.makeText(context, "Contact has been deleted successfully", Toast.LENGTH_SHORT).show()
+                        }
+                    }.create().show()
                 }
             }
 
