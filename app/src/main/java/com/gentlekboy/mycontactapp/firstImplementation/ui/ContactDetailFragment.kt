@@ -4,21 +4,19 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.RecyclerView
 import com.gentlekboy.mycontactapp.R
 import com.gentlekboy.mycontactapp.databinding.FragmentContactDetailBinding
-import com.gentlekboy.mycontactapp.databinding.FragmentContactsBinding
 import com.gentlekboy.mycontactapp.firstImplementation.data.ContactClickListener
 import com.gentlekboy.mycontactapp.firstImplementation.data.ContactsData
+import com.gentlekboy.mycontactapp.firstImplementation.data.REQUEST_CODE
 
 class ContactDetailFragment : Fragment(), ContactClickListener {
 
@@ -27,20 +25,18 @@ class ContactDetailFragment : Fragment(), ContactClickListener {
     private val binding get() = _binding!!
     private val args : ContactDetailFragmentArgs by navArgs()
     lateinit var contactsData: ContactsData
-    private val adapter = ContactAdapter(this)
     private var viewModel: ContactsViewModel = ContactsViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         contactsData = args.contactData
-
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentContactDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -48,7 +44,7 @@ class ContactDetailFragment : Fragment(), ContactClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //Bind data from previous fragment to appropriate textviews
+        //Bind data from previous fragment to appropriate text views
         binding.displayFirstName.text = contactsData.firstName
         binding.displayLastName.text = contactsData.lastName
         binding.displayPhoneNumber.text = contactsData.phoneNumber
@@ -57,7 +53,7 @@ class ContactDetailFragment : Fragment(), ContactClickListener {
         //Click delete icon to delete contact and move to contact fragment
         binding.deleteIcon.setOnClickListener {
             viewModel.deleteContact(contactsData)
-            Toast.makeText(context, "Contact deleted successfully", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, getString(R.string.Contact_deleted_successfully), Toast.LENGTH_SHORT).show()
 
             //Navigate to contact fragment
             val action = ContactDetailFragmentDirections.actionContactDetailFragmentToContactsFragment()
@@ -67,6 +63,9 @@ class ContactDetailFragment : Fragment(), ContactClickListener {
 
         //Click edit icon to update contact details
         binding.editIcon.setOnClickListener {
+            //Navigate to update fragment
+            val action = ContactDetailFragmentDirections.actionContactDetailFragmentToEditContactFragment(contactsData)
+            findNavController().navigate(action)
         }
 
         //Click email icon to send mail to contact
@@ -89,12 +88,11 @@ class ContactDetailFragment : Fragment(), ContactClickListener {
     private fun shareContact() {
         val intent = Intent().apply {
             action = Intent.ACTION_SEND_MULTIPLE
-            putExtra(Intent.EXTRA_TEXT, contactsData.phoneNumber)
-            putExtra(Intent.EXTRA_TEXT, contactsData.firstName + contactsData.lastName)
+            putExtra(Intent.EXTRA_TEXT, "${contactsData.firstName} ${contactsData.lastName}\n${contactsData.phoneNumber}")
             type = "text/plain"
         }
 
-        val shareIntent = Intent.createChooser(intent,"Share contact via")
+        val shareIntent = Intent.createChooser(intent,getString(R.string.share_contact_via))
         startActivity(shareIntent)
     }
 
@@ -106,7 +104,7 @@ class ContactDetailFragment : Fragment(), ContactClickListener {
             type = "message/rfc822"
         }
 
-        val sendMailIntent = Intent.createChooser(intent, "Send mail via:")
+        val sendMailIntent = Intent.createChooser(intent, getString(R.string.send_mail_via))
         startActivity(sendMailIntent)
     }
 
@@ -115,7 +113,7 @@ class ContactDetailFragment : Fragment(), ContactClickListener {
         val string = binding.displayPhoneNumber.text.toString().trim()
         if (string.isNotEmpty()){
             if (ContextCompat.checkSelfPermission(requireContext(),android.Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
-                requestPermissions(arrayOf(android.Manifest.permission.CALL_PHONE), 200)
+                requestPermissions(arrayOf(android.Manifest.permission.CALL_PHONE), REQUEST_CODE)
             }else{
                 val number = "tel:$string"
                 val intent = Intent(Intent.ACTION_CALL)
@@ -131,11 +129,11 @@ class ContactDetailFragment : Fragment(), ContactClickListener {
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
-        if (requestCode == 200){
+        if (requestCode == REQUEST_CODE){
             if (grantResults.isNotEmpty() && grantResults[0]==PackageManager.PERMISSION_GRANTED){
                 makePhoneCall()
             }else{
-                Toast.makeText(requireContext(), "Permission DENIED", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.permission_denied), Toast.LENGTH_SHORT).show()
             }
         }
     }

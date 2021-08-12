@@ -1,8 +1,6 @@
 package com.gentlekboy.mycontactapp.firstImplementation.ui
 
-import android.content.ContentValues.TAG
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -23,10 +21,6 @@ class ContactsFragment : Fragment(), ContactClickListener {
     private var _binding: FragmentContactsBinding? = null
     private val binding get() = _binding!!
     private val adapter = ContactAdapter(this)
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -80,15 +74,17 @@ class ContactsFragment : Fragment(), ContactClickListener {
 
             when(direction){
                 ItemTouchHelper.RIGHT -> {
-                    UpdateContactFragment(currentContact).show(childFragmentManager, "")
+                    UpdateContactDialogueFragment(currentContact).show(childFragmentManager, "")
                 }
                 ItemTouchHelper.LEFT -> {
                     AlertDialog.Builder(requireContext()).also {
-                        it.setTitle("Are you sure you want to delete this contact?")
-                        it.setPositiveButton("Yes"){dialogue, which ->
+                        it.setTitle(getString(R.string.delete_prompt))
+
+                        it.setPositiveButton(getString(R.string.yes)){dialogue, which ->
                             viewModel.deleteContact(currentContact)
                             binding.recyclerview.adapter?.notifyItemRemoved(position)
-                            Toast.makeText(context, "Contact has been deleted successfully", Toast.LENGTH_SHORT).show()
+
+                            Toast.makeText(context, getString(R.string.Contact_deleted_successfully), Toast.LENGTH_SHORT).show()
                         }
                     }.create().show()
                 }

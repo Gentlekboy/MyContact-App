@@ -7,10 +7,10 @@ import com.gentlekboy.mycontactapp.databinding.RecyclerviewContactsBinding
 import com.gentlekboy.mycontactapp.firstImplementation.data.ContactClickListener
 import com.gentlekboy.mycontactapp.firstImplementation.data.ContactsData
 
-class ContactAdapter(val contactClickListener: ContactClickListener): RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
+class ContactAdapter(private val contactClickListener: ContactClickListener): RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
     var listOfContactsToBeShown = arrayListOf<ContactsData>()
 
-    //Viewholder
+    //View holder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(RecyclerviewContactsBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }

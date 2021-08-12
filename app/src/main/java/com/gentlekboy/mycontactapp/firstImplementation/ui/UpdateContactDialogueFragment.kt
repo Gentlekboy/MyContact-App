@@ -7,13 +7,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.gentlekboy.mycontactapp.R
-import com.gentlekboy.mycontactapp.databinding.FragmentUpdateContactBinding
+import com.gentlekboy.mycontactapp.databinding.FragmentUpdateContactDialogueBinding
 import com.gentlekboy.mycontactapp.firstImplementation.data.ContactsData
+import com.gentlekboy.mycontactapp.firstImplementation.data.Validate
 
-class UpdateContactFragment(private val contactsData: ContactsData) : DialogFragment() {
-    private var _binding: FragmentUpdateContactBinding? = null
+class UpdateContactDialogueFragment(private val contactsData: ContactsData) : DialogFragment() {
+    private var _binding: FragmentUpdateContactDialogueBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: ContactsViewModel
 
@@ -28,14 +28,14 @@ class UpdateContactFragment(private val contactsData: ContactsData) : DialogFrag
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentUpdateContactBinding.inflate(inflater, container, false)
+        _binding = FragmentUpdateContactDialogueBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this).get(ContactsViewModel::class.java)
 
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         binding.firstName.setText(contactsData.firstName)
         binding.lastName.setText(contactsData.lastName)
@@ -49,18 +49,30 @@ class UpdateContactFragment(private val contactsData: ContactsData) : DialogFrag
             val contactPhoneNumber = binding.phoneNumber.text.toString().trim()
             val contactEmail = binding.emailAddress.text.toString().trim()
 
-            if (contactFirstName.isEmpty()){
-                binding.firstName.error = R.string.first_name_required.toString()
+            val validate = Validate()
+
+            if (validate.validateFirstName_isEmpty_returnBoolean(contactFirstName)){
+                binding.firstName.error = getString(R.string.first_name_required)
                 return@setOnClickListener
             }
 
-            if (contactLastName.isEmpty()){
-                binding.lastName.error = R.string.last_name_required.toString()
+            if (validate.validateLastName_isEmpty_returnBoolean(contactLastName)){
+                binding.lastName.error = getString(R.string.last_name_required)
                 return@setOnClickListener
             }
 
-            if (contactPhoneNumber.isEmpty()){
-                binding.phoneNumber.error = R.string.phone_number_name_required.toString()
+            if (validate.validatePhoneNumber_isEmpty_returnBoolean(contactPhoneNumber)){
+                binding.phoneNumber.error = getString(R.string.phone_number_is_required)
+                return@setOnClickListener
+            }
+
+            if (validate.validateEmail_isEmpty_returnBoolean(contactEmail)){
+                binding.emailAddress.error = getString(R.string.email_is_required)
+                return@setOnClickListener
+            }
+
+            if (!validate.validateEmail_matchesEmailPattern_returnBoolean(contactEmail)){
+                binding.emailAddress.error = getString(R.string.enter_valid_email)
                 return@setOnClickListener
             }
 
@@ -68,11 +80,18 @@ class UpdateContactFragment(private val contactsData: ContactsData) : DialogFrag
             contactsData.lastName = contactLastName
             contactsData.phoneNumber = contactPhoneNumber
             contactsData.email = contactEmail
+            contactsData.abbreviation = "${contactFirstName[0].uppercaseChar()}${contactLastName[0].uppercase()}"
 
             viewModel.updateContact(contactsData)
             dismiss()
 
-            Toast.makeText(context, "Contact updated successfully", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, getString(R.string.Contact_updated_successfully), Toast.LENGTH_SHORT).show()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        _binding = null
     }
 }
