@@ -15,8 +15,10 @@
         <entry key="app/src/main/res/layout/contact_reader_view_holder.xml" value="0.254981884057971" />
         <entry key="app/src/main/res/layout/fragment_add.xml" value="0.254981884057971" />
         <entry key="app/src/main/res/layout/fragment_add_contact.xml" value="0.2625" />
-        <entry key="app/src/main/res/layout/fragment_contact_detail.xml" value="0.2625" />
+        <entry key="app/src/main/res/layout/fragment_contact_detail.xml" value="0.1703125" />
         <entry key="app/src/main/res/layout/fragment_contacts.xml" value="0.2625" />
+        <entry key="app/src/main/res/layout/fragment_edit_contact.xml" value="0.1703125" />
+        <entry key="app/src/main/res/layout/fragment_update.xml" value="0.2" />
         <entry key="app/src/main/res/layout/fragment_update_contact.xml" value="0.254981884057971" />
         <entry key="app/src/main/res/layout/recyclerview_contacts.xml" value="0.2625" />
       </map>
